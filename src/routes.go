@@ -1,23 +1,26 @@
 package src
 
 import (
-	"embed"
 	"net/http"
+	"os"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
 
+var dev = os.Getenv("DEV") != ""
+
 // Sets up the Echo server, and registers all routes and sub routes
-func (s *Server) RegisterRoutes(staticEmbed *embed.FS) http.Handler {
+func (s *Server) RegisterRoutes() http.Handler {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	// e.Use(middleware.CSRF())
 
 	// Static files
-	fileServer := http.FileServer(http.FS(staticEmbed))
-	e.GET("/public/*", echo.WrapHandler(fileServer))
+	staticFilesFolder := disableCacheInDevMode(http.StripPrefix("/public",
+		http.FileServer(http.Dir("public"))))
+	e.GET("/public/*", echo.WrapHandler(staticFilesFolder))
 
 	// TODO: Register subroutes here
 	// login.SetupRoutes(e.Group("/auth"))
@@ -27,4 +30,14 @@ func (s *Server) RegisterRoutes(staticEmbed *embed.FS) http.Handler {
 	})
 
 	return e
+}
+
+func disableCacheInDevMode(next http.Handler) http.Handler {
+	if !dev {
+		return next
+	}
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Cache-Control", "no-store")
+		next.ServeHTTP(w, r)
+	})
 }

@@ -2,10 +2,13 @@
   "name": "acide",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.go",
   "scripts": {
-    "dev": "concurrently 'air' 'tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch'",
-    "build": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch"
+    "dev": "concurrently 'air' 'tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch' 'templ generate --watch'",
+    "air": "air",
+    "tailwind:watch": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch",
+    "tailwind:build": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --minify",
+    "temple:watch": "templ generate --watch"
   },
   "keywords": [],
   "author": "",

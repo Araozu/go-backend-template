@@ -2,13 +2,13 @@ package src
 
 import (
 	"acide/src/database"
-	"embed"
 	"fmt"
-	_ "github.com/joho/godotenv/autoload"
 	"net/http"
 	"os"
 	"strconv"
 	"time"
+
+	_ "github.com/joho/godotenv/autoload"
 
 	"gorm.io/gorm"
 )
@@ -19,7 +19,7 @@ type Server struct {
 }
 
 // Creates a new Server
-func NewServer(static *embed.FS) *http.Server {
+func NewServer() *http.Server {
 	portEnv := os.Getenv("PORT")
 	port, err := strconv.Atoi(portEnv)
 	if err != nil {
@@ -37,7 +37,7 @@ func NewServer(static *embed.FS) *http.Server {
 	// Declare Server config
 	server := &http.Server{
 		Addr:         fmt.Sprintf(":%d", NewServer.port),
-		Handler:      NewServer.RegisterRoutes(static),
+		Handler:      NewServer.RegisterRoutes(),
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 30 * time.Second,
