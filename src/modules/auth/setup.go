@@ -31,5 +31,9 @@ func SetupSchema(dbHandle *gorm.DB) {
 func SetupRoutes(g *echo.Group) {
 	log.Print("Setting up the auth module")
 
+	// To just render an HTML template with HTTP 200 status:
+	// g.GET("/login", echo.WrapHandler(templ.Handler(LoginTempl())))
+
+	// To include custom rendering logic:
 	g.GET("/login", login)
 }

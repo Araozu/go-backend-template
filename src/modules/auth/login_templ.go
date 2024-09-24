@@ -43,7 +43,7 @@ func LoginTempl() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"font-bold text-white py-2 px-4 m-2 bg-cyan-800 rounded\">This is the Login template</div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"font-bold text-white py-2 px-4 m-2 bg-cyan-800 rounded underline\">This is the Login template</div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
