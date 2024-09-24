@@ -1,6 +1,7 @@
 package src
 
 import (
+	"acide/src/modules/auth"
 	"net/http"
 	"os"
 
@@ -24,6 +25,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 	// TODO: Register subroutes here
 	// login.SetupRoutes(e.Group("/auth"))
+	auth.SetupRoutes(e.Group("/auth"))
 
 	e.GET("/", func(ctx echo.Context) error {
 		return ctx.String(http.StatusOK, "Hello")
