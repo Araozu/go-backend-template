@@ -1,4 +1,31 @@
 version: "3"
 
-includes:
-  build: ./Taskfile_{{OS}}.yml
+vars:
+  NAME: "main"
+  BIN_NAME: "{{.NAME}}"
+
+interval: 500ms
+
+tasks:
+  dev:
+    desc: Run app in development mode with reload
+    watch: true
+    sources:
+      - "src/**/*.go"
+      - exclude: "src/**/*.templ"
+    deps:
+      - kill
+    cmds:
+      - cmd: go build -o ./tmp/{{.BIN_NAME}}.exe main.go
+        platforms: [windows]
+      - cmd: ./tmp/{{.BIN_NAME}}.exe
+        platforms: [windows]
+      - cmd: go build -o ./tmp/{{.BIN_NAME}} main.go
+        platforms: [linux]
+      - cmd: ./tmp/{{.BIN_NAME}}
+        platforms: [linux]
+    status: ["false"]
+
+  kill:
+    cmds:
+      - killall -q {{.BIN_NAME}} || echo "Process was not running."
