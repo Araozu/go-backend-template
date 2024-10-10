@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
-var dev = os.Getenv("APP_ENV") != "dev"
+var dev = os.Getenv("APP_ENV") == "dev"
 
 // Sets up the Echo server, and registers all routes and sub routes
 func (s *Server) RegisterRoutes() http.Handler {
