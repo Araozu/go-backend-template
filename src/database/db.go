@@ -15,10 +15,10 @@ var (
 	username = os.Getenv("DB_USERNAME")
 	port     = os.Getenv("DB_PORT")
 	host     = os.Getenv("DB_HOST")
-	schema   = os.Getenv("DB_SCHEMA")
 	dbHandle *gorm.DB
 )
 
+// Creates a connection to the database using env vars
 func New() *gorm.DB {
 	// Reuse Connection
 	if dbHandle != nil {

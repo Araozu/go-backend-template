@@ -4,11 +4,9 @@
   "description": "",
   "main": "main.go",
   "scripts": {
-    "dev": "concurrently 'air' 'tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch' 'templ generate --watch'",
-    "air": "air",
+    "dev": "concurrently \"task build:dev\" \"npm run tailwind:watch\" \"templ generate --watch\"",
     "tailwind:watch": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch",
-    "tailwind:build": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --minify",
-    "temple:watch": "templ generate --watch"
+    "tailwind:build": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --minify"
   },
   "keywords": [],
   "author": "",

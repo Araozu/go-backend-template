@@ -2,11 +2,11 @@
 
 ## Installation & Set Up
 
-1. Install [the Go Programming Language](https://go.dev)
-2. Install [Air](https://github.com/air-verse/air) by running:
+1. Install [the Go Programming Language](https://go.dev) for your OS.
+2. Install [Task](https://taskfile.dev/) by running:
 
 ```sh
-go install github.com/air-verse/air@latest
+go install github.com/go-task/task/v3/cmd/task@latest
 ```
 
 3. Install [Templ](https://templ.guide/) by running:
@@ -41,11 +41,19 @@ npm run dev
 This will start 3 processes:
 
 - Tailwind watch
-- Air
+- Task
 - Templ watch
 
 
 ## Building
+
+Compile the components in order:
+
+Compile the html templates:
+
+```
+templ generate
+```
 
 Compile the Go binary:
 
@@ -53,5 +61,11 @@ Compile the Go binary:
 go build main.go
 ```
 
-And ship it along the `public` folder
+Compile tailwind:
 
+```sh
+npm run tailwind:build
+```
+
+And deploy the resulting `main` file along with the
+`public` folder.

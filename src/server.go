@@ -9,7 +9,6 @@ import (
 	"time"
 
 	_ "github.com/joho/godotenv/autoload"
-
 	"gorm.io/gorm"
 )
 
@@ -31,12 +30,12 @@ func NewServer() *http.Server {
 		db:   database.New(),
 	}
 
-	// TODO: Register DB schemas here
+	// NOTE: Register DB schemas for your modules here
 	// login.SetupSchema(NewServer.db)
 
 	// Declare Server config
 	server := &http.Server{
-		Addr:         fmt.Sprintf(":%d", NewServer.port),
+		Addr:         fmt.Sprintf("127.0.0.1:%d", NewServer.port),
 		Handler:      NewServer.RegisterRoutes(),
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  10 * time.Second,

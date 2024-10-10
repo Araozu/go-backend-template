@@ -2,4 +2,9 @@ node_modules
 public/css/output.css
 .env
 tmp
+.task
+./main
+./main.exe
+
+*_templ.go
 
